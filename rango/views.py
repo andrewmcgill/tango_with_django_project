@@ -1,10 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rango.models import Category
 
 def index(request):
-    # pass to template engine as context
+    # query db for a list of cats
+    # order cats by likes in desc order
+    # retrieve top 5
+    # put into context dict
+    # pass to temp engine
+    
+    category_list = Category.objects.order_by('-likes')[:5]
+    
     # boldmessage matches that in template - ANY instance replaced
-    context_dict = {'boldmessage':'Crunchy, creamy, cookie, candy, cupcake!'}
+    context_dict = {}
+    context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
+    context_dict['categories'] = category_list
     
     # rendered reponse returned to client
     # shortcut function

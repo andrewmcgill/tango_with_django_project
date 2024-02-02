@@ -60,7 +60,8 @@ def add_category(request):
             cat = form.save(commit=True)
             print(cat, cat.slug) # printout to console
             
-            return redirect('/rango/')
+            # reverse is equivalent of the url template tag within python code
+            return redirect(reverse('rango:index'))
         
         else:
             # errors
@@ -78,7 +79,7 @@ def add_page(request, category_name_slug):
         
     # cannot add a page to a Category that does not exist
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:index'))
     
     form = PageForm()
     
